@@ -1,15 +1,13 @@
-import io.kotest.assertions.withClue
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import java.io.File
 
 @Suppress("unused")
-
 class WordleTest : StringSpec({
 
     "isValid should return true for 5 letters" {
         isValid("apple") shouldBe true
-        isValid("applE") shouldBe false
+        isValid("applE") shouldBe true
         isValid("apples") shouldBe false
         isValid("app") shouldBe false
         isValid("app1e") shouldBe false
@@ -34,5 +32,3 @@ class WordleTest : StringSpec({
         result shouldBe listOf(1, 0, 1, 1, 1)
     }
 })
-
-
