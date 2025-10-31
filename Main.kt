@@ -1,28 +1,32 @@
-import kotlin.system.exitProcess
+private const val WORD_LENGTH = 5
+private const val MAX_ATTEMPTS = 10
 
 fun main() {
     val words = readWordList("data/words.txt")
 
     val target = pickRandomWord(words)
-    println("welcome to Wordle！")
-    println("Please guess 5 letter words, you have 10 chances!\n")
+    println("Welcome to Wordle!")
+    println("Please guess $WORD_LENGTH-letter words, you have $MAX_ATTEMPTS chances!\n")
 
     var attempt = 1
-    val maxAttempts = 10
 
-    while (attempt <= maxAttempts) 
-    {
+    while (attempt <= MAX_ATTEMPTS) {
         val guess = obtainGuess(attempt)
+
+        if (guess.length != WORD_LENGTH) {
+            println("Input must be $WORD_LENGTH letters. Try again.")
+            continue
+        }
 
         val matches = evaluateGuess(guess, target)
         displayGuess(guess, matches)
 
         if (guess == target) {
-            println("Congratulations! You guessed the word in $attempt attempt(s).")
+            println("Congratulations! You guessed the word in $attempt attempt.")
             return
         }
         attempt++
     }
 
-    println("\n gg! \n The correct word was '$target'.")
+    println("\nGG!\nThe correct word was '$target'.")
 }
